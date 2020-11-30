@@ -12,6 +12,9 @@ public:
     {
         vector<float> nums;
         int i = 0, j = 0;
+        int len = nums1.size() + nums2.size();
+        int idx1 = len / 2;
+        int idx2 = len / 2 + len % 2 - 1;
         while (i < nums1.size() or j < nums2.size())
         {
             int num1 = i < nums1.size() ? nums1[i] : INT_MAX;
@@ -24,10 +27,8 @@ public:
                 nums.emplace_back(num2);
                 ++j;
             }
+            if (nums.size() > idx2 + 1) break;
         }
-        int len = nums.size();
-        int idx1 = len / 2;
-        int idx2 = len / 2 + len % 2 - 1;
         return (nums[idx1] + nums[idx2]) / 2;
     }
 };
