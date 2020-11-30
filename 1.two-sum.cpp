@@ -6,21 +6,18 @@
 
 // @lc code=start
 
-#include <vector>
-#include <map>
-
 class Solution {
 public:
-    std::vector<int> twoSum(std::vector<int>& nums, int target) {
-        std::map<int, int> list;
-        std::vector<int> ans;
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int, int> list;
+        vector<int> ans;
         for (int idx = 0; idx < nums.size(); ++idx) {
             int num = nums[idx];
             if (list.find(target - num) == list.end()) {
                 list[num] = idx;
                 continue;
             }
-            ans = std::vector<int>{list[target - num], idx};
+            ans = vector<int>{list[target - num], idx};
             break;
         }
         return ans;
