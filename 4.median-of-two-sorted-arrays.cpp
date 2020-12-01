@@ -5,6 +5,8 @@
  */
 
 // @lc code=start
+
+// Follow-Up: 显然是要用二分法，但是不知道怎么做。
 class Solution
 {
 public:
