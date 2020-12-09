@@ -7,27 +7,33 @@
 // @lc code=start
 class Solution {
 private:
-    void helper(vector<vector<int>>& res, vector<int> comb, vector<int>& candidates, int target, int idx) {
+    void dfs(vector<int>& candidates, int target, int idx, 
+             vector<int>& combination, 
+             vector<vector<int>>& ans) {
         if (target == 0) {
-            res.emplace_back(comb);
+            ans.emplace_back(combination);
             return;
         }
+        else if (target < 0) return;
 
-        for (int i = idx; i < candidates.size(); ++i) {
-            int num = candidates[i];
-            if (num > target) break;
-            comb.emplace_back(num);
-            helper(res, comb, candidates, target - num, i + 1);
-            comb.pop_back();
-            while (i < candidates.size() - 1 and candidates[i + 1] == num) ++i;
+        for (int i = idx; i < candidates.size();) {
+            int candidate = candidates[i];
+            combination.emplace_back(candidate);
+            dfs(candidates, target - candidate, i + 1, combination, ans);
+            combination.pop_back();
+            while (i < candidates.size() and candidates[i] == candidate) {
+                ++i;
+            }
         }
     }
+    
 public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-        vector<vector<int>>      res;
         sort(candidates.begin(), candidates.end());
-        helper(res, vector<int>{}, candidates, target, 0);
-        return res;
+        vector<vector<int>> ans;
+        vector<int> combination;
+        dfs(candidates, target, 0, combination, ans);
+        return ans;
     }
 };
 // @lc code=end
