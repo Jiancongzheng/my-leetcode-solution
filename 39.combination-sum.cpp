@@ -6,7 +6,7 @@
 
 // @lc code=start
 
-// 用引用的效率要比值传递高得多。
+// Tips: 用引用的效率要比值传递高得多。
 class Solution {
 private:
     void dfs(int target, vector<int>& candidates, int idx, vector<vector<int>>& ans, vector<int>& comb) {
