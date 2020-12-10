@@ -8,29 +8,17 @@
 class Solution {
 public:
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<vector<int>> ans;
-        if (nums.empty()) return ans;
-        queue<vector<int>> queue_list;
-        queue_list.push(vector<int>());
-
-        for (int i = 0; i < nums.size(); ++i) {
-            int len = queue_list.size();
-            for(int j = 0; j < len; ++j) {
-                auto tmp = queue_list.front();
-                for (int k = 0; k < tmp.size(); ++k) {
-                    auto cand = tmp;
-                    auto pos = cand.begin() + k;
-                    cand.insert(pos, nums[i]);
-                    queue_list.push(cand);
+        vector<vector<int>> ans{{}};
+        for (int num : nums) {
+            for (int i = ans.size(); i > 0; --i) {
+                vector<int> vec = ans.front();
+                ans.erase(ans.begin());
+                for (int pos = 0; pos <= vec.size(); ++pos) {
+                    vector<int> copy = vec;
+                    copy.insert(copy.begin() + pos, num);
+                    ans.emplace_back(copy);
                 }
-                tmp.emplace_back(nums[i]);
-                queue_list.push(tmp);
-                queue_list.pop();
             }
-        }
-        while (!queue_list.empty()) {
-            ans.emplace_back(queue_list.front());
-            queue_list.pop();
         }
         return ans;
     }
