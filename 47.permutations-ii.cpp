@@ -14,19 +14,20 @@ private:
             return;
         }
 
-        for (int i = 0; i < nums.size(); ++i) {
-            if (visited[i]) continue;
+        for (int i = 0; i < nums.size();) {
+            if (visited[i]) {
+                ++i;
+                continue;
+            }
             int num = nums[i];
             visited[i] = true;
             permutation.emplace_back(num);
             dfs(ans, permutation, visited, nums);
             permutation.pop_back();
             visited[i] = false;
-            
             while (i < nums.size() and nums[i] == num) {
                 ++i;
             }
-            --i;
         }
     }
 public:
