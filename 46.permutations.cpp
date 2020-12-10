@@ -17,7 +17,7 @@ private:
         for (int i = 0; i < nums.size(); ++i) {
             if (visited[i]) continue;
             visited[i] = true;
-            permutation.push_back(nums[i]);
+            permutation.emplace_back(nums[i]);
             dfs(ans, permutation, visited, nums);
             permutation.pop_back();
             visited[i] = false;
