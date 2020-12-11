@@ -6,36 +6,38 @@
 
 // @lc code=start
 class Solution {
-private:
-    void twoSum(vector<int>& nums, int idx, int target, vector<vector<int>>& ans) {
-        map<int, int> m;
-        for (int i = idx + 1; i < nums.size(); ++i) {
-            int num = nums[i];
-            if (m.find(target - num) != m.end()) {
-                ans.emplace_back(vector<int>{nums[idx], target - num, num});
-                while (i < nums.size() and nums[i] == num) {
-                    ++i;
-                }
-                --i;
-            }
-            else m[num] = i;
-
-
-        }
-    }
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        vector<vector<int>> ans;
-        for (int i = 0; i < nums.size();) {
-            int num = nums[i];
-            if (num > 0) break;
-            twoSum(nums, i, 0 - num, ans);
-            while (i < nums.size() and nums[i] == num) {
-                ++i;
+        vector<vector<int>> lists;
+        int len = nums.size();
+        for (int i = 0; i < len - 2; i++) {
+            if (nums[i] > 0) return lists;
+            if (i > 0 and nums[i] == nums[i-1]) continue;
+            int target = 0 - nums[i];
+            int j = i + 1;
+            int k = len - 1;
+            while (true) {
+                if (nums[j] + nums[k] == target) {
+                    lists.push_back({nums[i], nums[j], nums[k]});
+                }
+                if (nums[j] == nums[k]) break;
+                if (nums[j] + nums[k] < target) {
+                    int current = nums[j];
+                    while (nums[j] == current and j != k) {
+                        j++;
+                    }
+                }
+                else {
+                    int current = nums[k];
+                    while (nums[k] == current and j != k) {
+                        k--;
+                    }
+                }
+                if (j == k or nums[j] > target) break;
             }
         }
-        return ans;
+        return lists;
     }
 };
 // @lc code=end
