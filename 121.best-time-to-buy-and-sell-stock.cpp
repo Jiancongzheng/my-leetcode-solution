@@ -8,21 +8,14 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int maxP = 0;
-        int sell = 0, buy = 0;
+        int ans = 0;
+        int minPriceSoFar = INT_MAX;
         for (int curr = 0; curr < prices.size(); ++curr) {
-            if (prices[curr] < prices[buy]) {
-                maxP = max(maxP, prices[sell] - prices[buy]);
-                buy = curr;
-                sell = curr;
-            }
-            
-            if (prices[curr] > prices[sell]) {
-                sell = curr;
-                maxP = max(maxP, prices[sell] - prices[buy]);
-            }
+            int price = prices[curr];
+            minPriceSoFar = min(price, minPriceSoFar);
+            ans = max(ans, price - minPriceSoFar);
         }
-        return maxP;
+        return ans;
     }
 };
 // @lc code=end
