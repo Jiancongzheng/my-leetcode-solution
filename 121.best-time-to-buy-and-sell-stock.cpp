@@ -11,9 +11,9 @@ public:
         int ans = 0;
         int minPriceSoFar = INT_MAX;
         for (int curr = 0; curr < prices.size(); ++curr) {
-            int price = prices[curr];
-            minPriceSoFar = min(price, minPriceSoFar);
-            ans = max(ans, price - minPriceSoFar);
+            int currPrice = prices[curr];
+            minPriceSoFar = min(currPrice, minPriceSoFar);
+            ans = max(ans, currPrice - minPriceSoFar);
         }
         return ans;
     }
