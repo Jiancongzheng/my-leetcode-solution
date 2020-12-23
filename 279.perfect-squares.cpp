@@ -5,7 +5,7 @@
  */
 
 // @lc code=start
-class Solution {
+class Solution1 {
 public:
     int numSquares(int n) {
         vector<int> dp(n + 1, INT_MAX);
@@ -16,6 +16,26 @@ public:
             }
         }
         return dp.back();
+    }
+};
+
+// Lagrange's four-square theorem
+// 数学方法也太顶了吧
+class Solution {
+public:
+    int numSquares(int n) {
+        while (n % 4 == 0) n /= 4;
+        if (n % 8 == 7) return 4;
+        for (int i = 0; i*i <= n; i++) {
+            int j = sqrt(n - i * i);
+            if (j * j + i * i == n) {
+                if (j != 0 and i != 0) {
+                    return 2;
+                }
+                return 1;
+            }
+        }
+        return 3;
     }
 };
 // @lc code=end
