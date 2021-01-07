@@ -5,6 +5,8 @@
  */
 
 // @lc code=start
+
+// Time complexity log(n^2)
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
