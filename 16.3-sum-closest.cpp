@@ -18,13 +18,7 @@ public:
             while (l < r) {
                 int sum = nums[i] + nums[l] + nums[r];
                 if (sum == target) return sum;
-                
                 if (abs(ans - target) > abs(sum - target)) ans = sum;
-<<<<<<< HEAD
-                
-=======
-
->>>>>>> c23fdb5ddedc8d90ea3119c2eecd5b7533dc0eaa
                 if (sum < target) ++l;
                 else --r;
             }
