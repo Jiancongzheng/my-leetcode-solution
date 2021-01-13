@@ -6,26 +6,25 @@
 
 // @lc code=start
 class Solution {
-private:
-    void dfs(int&& pos, const vector<int>& nums, const int& target, vector<int>& sum_list, int& ans) {
-        if (sum_list.size() == 3) {
-            int sum3 = sum_list[0] + sum_list[1] + sum_list[2];
-            if (abs(sum3 - target) < abs(ans - target)) ans = sum3;
-            return;
-        }
-
-        for (int i = pos; i < nums.size(); ++i) {
-            sum_list.emplace_back(nums[i]);
-            dfs(i + 1, nums, target, sum_list, ans);
-            sum_list.pop_back();
-        }
-        return;
-    }
 public:
     int threeSumClosest(vector<int>& nums, int target) {
-        int ans;
-        vector<int> sum_list;
-        dfs(0, nums, target, sum_list, ans);
+        int ans = nums[0] + nums[1] + nums[2];
+        int len = nums.size();
+        if (len == 3) return ans;
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i < len - 2; ++i) {
+            int r = len - 1;
+            int l = i + 1;
+            while (l < r) {
+                int sum = nums[i] + nums[l] + nums[r];
+                if (sum == target) return sum;
+                
+                if (abs(ans - target) > abs(sum - target)) ans = sum;
+                
+                if (sum < target) ++l;
+                else --r;
+            }
+        }
         return ans;
     }
 };
