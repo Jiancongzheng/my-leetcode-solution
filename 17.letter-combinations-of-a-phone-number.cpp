@@ -5,7 +5,7 @@
  */
 
 // @lc code=start
-class Solution {
+class Solution1 {
 private:
     map<char, string> buttons_{
         {'2', "abc"},
@@ -38,6 +38,40 @@ public:
             }
         }
         return res;
+    }
+};
+
+class Solution {
+private:
+    map<char, string> buttons_{
+        {'2', "abc"},
+        {'3', "def"},
+        {'4', "ghi"},
+        {'5', "jkl"},
+        {'6', "mno"},
+        {'7', "pqrs"},
+        {'8', "tuv"},
+        {'9', "wxyz"},
+    };
+    void dfs(const string& digits, int&& i, string& str, vector<string>& ans) {
+        if (str.length() == digits.length()) {
+            ans.emplace_back(str);
+            return;
+        }
+        string candidates = buttons_[digits[i]];
+        for (char& ch: candidates) {
+            str.push_back(ch);
+            dfs(digits, i + 1, str, ans);
+            str.pop_back();
+        }
+    }
+public:
+    vector<string> letterCombinations(string digits) {
+        vector<string> ans;
+        if (digits.empty()) return ans;
+        string str;
+        dfs(digits, 0, str, ans);
+        return ans;
     }
 };
 // @lc code=end
