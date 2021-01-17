@@ -8,29 +8,15 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        int len = nums.size();
-        int i = len - 1;
-        for (; i >= 0; --i) {
-            if (i == 0) break;
-            if (nums[i - 1] < nums[i]) break; 
+        int left = nums.size() - 2;
+        while (left >= 0 and nums[left] >= nums[left + 1]) --left;
+        if (left >= 0) {
+            int right = nums.size() - 1;
+            while (right >= left and nums[right] <= nums[left]) --right;
+            swap(nums[right], nums[left]);
         }
-
-        if (i == 0) {
-            for (; i < len / 2; ++i) {
-                swap(nums[i], nums[len - i - 1]);
-            }
-            return;
-        }
-
-        int j = len - 1;
-        for (; j >= i; --j) {
-            if (nums[j] > nums[i - 1]) {
-                swap(nums[j], nums[i - 1]);
-                break;
-            }
-        }
-
-        sort(nums.begin() + i, nums.end());
+        reverse(nums.begin() + left + 1, nums.end());
+        return;
     }
 };
 // @lc code=end
