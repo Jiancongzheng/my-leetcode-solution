@@ -19,7 +19,7 @@ public:
             {
                 if (i + 1 == ans.length() or ans[i] != ans[i + 1])
                 {
-                    tmp.push_back('0' + cnt);
+                    tmp += to_string(cnt);
                     tmp.push_back(ans[i]);
                     cnt = 1;
                     continue;
