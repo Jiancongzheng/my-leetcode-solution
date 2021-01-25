@@ -6,7 +6,7 @@
 
 // @lc code=start
 
-// Dynamic programming
+// Dynamic programming O(n^2)
 class Solution1 {
 public:
     bool canJump(vector<int>& nums) {
@@ -25,7 +25,7 @@ public:
     }
 };
 
-// Greedy
+// Greedy O(n)
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
