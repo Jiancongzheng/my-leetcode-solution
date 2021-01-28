@@ -10,26 +10,32 @@ public:
     void setZeroes(vector<vector<int>>& matrix) {
         int m = matrix.size();
         int n = matrix.front().size();
-        map<int, int> cols;
-        map<int, int> rows;
+        bool first_col = false;
+        bool first_row = false;
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (matrix[i][j] == 0) {
-                    cols[i] = 1;
-                    rows[j] = 1;
+                if (matrix[i][j] == 0) {\
+                    if (i == 0) first_col = true;
+                    if (j == 0) first_row = true;
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
                 }
             }
         }
-
-        for (auto& col: cols) {
-            for (int row = 0; row < n; ++row) {
-                matrix[col.first][row] = 0;
+        for (int i = 1; i < m; ++i) {
+            for (int j = 1; j < n; ++j) {
+                if (matrix[i][0] == 0 or matrix[0][j] == 0) matrix[i][j] = 0;
             }
         }
         
-        for (auto& row: rows) {
-            for (int col = 0; col < m; ++col) {
-                matrix[col][row.first] = 0;
+        if (first_col) {
+            for (int j = 0; j < n; ++j) {
+                matrix[0][j] = 0;
+            }
+        }
+        if (first_row) {
+            for (int i = 0; i < m; ++i) {
+                matrix[i][0] = 0;
             }
         }
     }
