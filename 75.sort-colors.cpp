@@ -8,23 +8,19 @@
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
+        int len = nums.size();
+        if (len <= 1) return;
         int l = 0;
-        int r = nums.size() - 1;
+        int r = len - 1;
         for (int i = 0; i <= r; ++i) {
-            while (l < nums.size() and nums[l] == 0) ++l;
-            while (r >= 0 and nums[r] == 2) --r;
-            if (r <= l) return;
-            if (nums[i] == 0 and i > l) {
+            if (nums[i] == 0) {
                 swap(nums[i], nums[l]);
-                ++l;
-                --i;
-                continue;
+                l++;
             }
-            if (nums[i] == 2) {
+            else if (nums[i] == 2) {
                 swap(nums[i], nums[r]);
-                --r;
-                --i;
-                continue;
+                r--;
+                i--;
             }
         }
         return;
