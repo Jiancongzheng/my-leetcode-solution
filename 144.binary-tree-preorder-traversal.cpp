@@ -44,7 +44,6 @@ public:
                 nodeStack.push(node->right);
                 node = node->left;
             }
-            
             node = nodeStack.top();
             nodeStack.pop();
         }
