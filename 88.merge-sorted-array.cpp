@@ -12,11 +12,12 @@ public:
         int len = m + n;
         int j = 0;
         int i = 0;
-        for (; i < m and j < n; ++i) {
+        while(i < m and j < n) {
             if (nums1[i] > nums2[j]) {
                 swap(nums1[i], nums2[j]);
                 ++j;
             }
+            ++i;
         }
         int tmpn = j;
         for (i = m; i < len and j < n; ++i, ++j) {
