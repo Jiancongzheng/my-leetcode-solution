@@ -17,17 +17,31 @@
  * };
  */
 class Solution {
-private:
-    bool validate(TreeNode* l, TreeNode* r) {
-        if (l == nullptr and r == nullptr) return true;
-        if (l == nullptr or r == nullptr) return false;
-        if (l->val != r->val) return false;
-        return validate(l->left, r->right) and validate(l->right, r->left);
-    }
 public:
     bool isSymmetric(TreeNode* root) {
-        if (root == nullptr) return true;
-        return validate(root->left, root->right);
+        queue <TreeNode*> q;
+        q.push(root);
+        while (!q.empty()) {
+            int len = q.size();
+            vector<TreeNode*> v;
+            while(len > 0) {
+                auto* n = q.front();
+                q.pop();
+                --len;
+                if (n == nullptr) continue;
+                v.emplace_back(n->left);
+                v.emplace_back(n->right);
+                q.push(n->left);
+                q.push(n->right);
+            }
+            for (int i = 0, j = v.size() - 1; i < j; ++i, --j) {
+                if (v[i] == nullptr and v[j] == nullptr) continue;
+                if (v[i] == nullptr or v[j] == nullptr) return false;
+                if (v[i]->val != v[j]->val) return false;
+            }
+            
+        }
+        return true;
     }
 };
 // @lc code=end
