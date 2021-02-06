@@ -8,14 +8,20 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        int ans = 0;
-        int minPriceSoFar = INT_MAX;
-        for (int curr = 0; curr < prices.size(); ++curr) {
-            int currPrice = prices[curr];
-            minPriceSoFar = min(currPrice, minPriceSoFar);
-            ans = max(ans, currPrice - minPriceSoFar);
+        int h = prices.front();
+        int l = h;
+        int res = 0;
+        for (int p: prices) {
+            if (p > h) {
+                h = p;
+            }
+            if (p < l) {
+                if (h - l > res) res = h - l;
+                l = p;
+                h = p;
+            }
         }
-        return ans;
+        return max(res, h - l);
     }
 };
 // @lc code=end
