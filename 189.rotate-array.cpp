@@ -8,11 +8,11 @@
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
+        auto tmp = nums;
         k = k % nums.size();
-        while (k > 0) {
-            nums.insert(nums.begin(), nums.back());
-            nums.erase(nums.end() - 1);
-            --k;
+        k = nums.size() - k;                                                                                           
+        for (int i = 0; i < nums.size(); ++i) {
+            nums[i] = tmp[(i + k) % nums.size()];
         }
     }
 };
