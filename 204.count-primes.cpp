@@ -6,21 +6,16 @@
 
 // @lc code=start
 class Solution {
-private:
-    bool isPrime(int n) {
-        if (n == 1) return false;
-        for (int i = 2; i <= sqrt(n); ++i) {
-            if (n % i == 0) return false;
-        }
-        return true;
-    }
 public:
     int countPrimes(int n) {
+        if (n < 2) return 0;
         int cnt = 0;
-        while (n > 2) {
-            --n;
-            if (isPrime(n)) {
-                ++cnt;
+        vector<bool> v(n, true);
+        v[1] = false;
+        for (int i = 2; i < n; ++i) {
+            if (v[i] == true) cnt++;
+            for (int t = 2; t * i < n; ++t) {
+                v[t * i] = false;
             }
         }
         return cnt;
