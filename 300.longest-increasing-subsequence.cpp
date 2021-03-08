@@ -10,27 +10,21 @@
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        vector<int> dp;
-        dp.emplace_back(nums.front());
-        for (int& num: nums) {
-            // Binary search
+        if (nums.size() == 1) return 1;
+        vector<int> dp{nums.front()};
+        for (const int& n : nums) {
             int l = 0;
             int r = dp.size() - 1;
-
-            // Find the first element in dp, which is greater and equal to num.
+            if (dp.back() < n) {
+                dp.emplace_back(n);
+                continue;
+            }
             while (l < r) {
-                int m = (l + r) / 2;
-                if (dp[m] < num) l = m + 1;
+                int m = l + (r - l) / 2;
+                if (dp[m] < n) l = m + 1;
                 else r = m;
             }
-
-            // if such element can not be found (All the elements in dp are smaller than num)
-            if (dp[l] < num) {
-                dp.emplace_back(num);
-            }
-
-            // Otherwise
-            else dp[l] = num;
+            dp[l] = n;
         }
         return dp.size();
     }
