@@ -8,10 +8,8 @@
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        if (amount == 0) return 0;
         sort(coins.begin(), coins.end());
         vector<int> dp(amount + 1, -1);
-        if (coins.front() > amount) return -1;
         dp[0] = 0;
         for (int i = coins.front(); i <= amount; ++i) {
             int cnt = INT_MAX;
