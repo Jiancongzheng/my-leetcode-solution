@@ -32,7 +32,6 @@ public:
         }
         if (cnt != pattern.size()) return false;
         return true;
-
     }
 };
 // @lc code=end
