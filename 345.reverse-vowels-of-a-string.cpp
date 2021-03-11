@@ -6,22 +6,31 @@
 
 // @lc code=start
 class Solution {
+private:
+    unordered_set<int> vowels{
+        'a',
+        'e',
+        'i',
+        'o',
+        'u',
+        'A',
+        'E',
+        'I',
+        'O',
+        'U'
+    };
 public:
     string reverseVowels(string s) {
-        vector<int> pos;
-        for (int i = 0; i < s.length(); ++i) {
-            const char ch = tolower(s[i]);
-            if (ch == 'a' or ch == 'e' or ch == 'i' or ch == 'o' or ch == 'u') {
-                pos.emplace_back(i);
-            }
-        }
-
-        for (int i = 0, j = pos.size() - 1; i < j; ++i, --j) {
-            int l = pos[i];
-            int r = pos[j];
+        int l = 0;
+        int r = s.length() - 1;
+        while (l < r) {
+            while (vowels.count(s[l]) == 0 and l < r) ++l;
+            while (vowels.count(s[r]) == 0 and r > l) --r;
+            if (r == l) break;
             swap(s[l], s[r]);
+            ++l;
+            --r;
         }
-
         return s;
     }
 };
