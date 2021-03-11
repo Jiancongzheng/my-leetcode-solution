@@ -5,20 +5,22 @@
  */
 
 // @lc code=start
-struct Node{
-    Node(int a, int b) {
-        num = a;
-        frq = b;
-    }
-    int num;
-    int frq;
-    
-    bool operator<(const Node n) const {
-        return this->frq < n.frq;
-    }
-};
+
 
 class Solution {
+private:
+    struct Node{
+        Node(int a, int b) {
+            num = a;
+            frq = b;
+        }
+        int num;
+        int frq;
+        
+        bool operator<(const Node n) const {
+            return this->frq < n.frq;
+        }
+    };
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
         unordered_map<int, int> uMap;
